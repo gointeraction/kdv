@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { GoogleGenAI, Chat } from '@google/genai';
-import { SYSTEM_PROMPT } from '../constants';
 import { ChatBubbleLeftRightIcon, PaperAirplaneIcon, XMarkIcon, UserCircleIcon, RobotIcon } from './icons/Icons';
 
 type Message = {
@@ -10,68 +8,78 @@ type Message = {
 
 const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    { role: 'model', text: '¡Hola! 👋 Soy tu asistente virtual de Kit Digital Venezuela. ¿En qué puedo ayudarte hoy?' }
+  ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const chatSessionRef = useRef<Chat | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  useEffect(scrollToBottom, [messages]);
-
-  const initializeChat = () => {
-    try {
-      if (!process.env.API_KEY) {
-        throw new Error("API key is not configured.");
-      }
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      chatSessionRef.current = ai.chats.create({
-        model: 'gemini-2.5-flash',
-        config: {
-          systemInstruction: SYSTEM_PROMPT,
-        },
-      });
-      setMessages([
-        { role: 'model', text: '¡Hola! 👋 Soy tu asistente virtual de Kit Digital Venezuela. ¿En qué puedo ayudarte hoy?' }
-      ]);
-      setError(null);
-    } catch (e: any) {
-      console.error("Failed to initialize chat:", e);
-      setError("No se pudo iniciar el chat. Por favor, verifica la configuración de la API Key.");
-    }
-  };
+  useEffect(() => {
+    // Scroll whenever messages update, especially during streaming
+    scrollToBottom();
+  }, [messages]);
 
   const toggleChat = () => {
-    if (!isOpen && !chatSessionRef.current) {
-      initializeChat();
-    }
     setIsOpen(!isOpen);
   };
   
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim() || isLoading || !chatSessionRef.current) return;
+    if (!input.trim() || isLoading) return;
 
     const userMessage: Message = { role: 'user', text: input };
-    setMessages(prev => [...prev, userMessage]);
+    const currentInput = input;
+    const currentMessages = [...messages, userMessage];
+    
     setInput('');
+    setMessages([...currentMessages, { role: 'model', text: '' }]); // Add user msg and model placeholder
     setIsLoading(true);
     setError(null);
 
     try {
-      const response = await chatSessionRef.current.sendMessage({ message: input });
-      const modelMessage: Message = { role: 'model', text: response.text };
-      setMessages(prev => [...prev, modelMessage]);
-    } catch (e) {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          history: currentMessages, // Send history up to the user's message
+        }),
+      });
+
+      if (!response.ok || !response.body) {
+        throw new Error(`Server error: ${response.statusText}`);
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        
+        const chunk = decoder.decode(value, { stream: true });
+
+        setMessages(prev => {
+          const lastMsgIndex = prev.length - 1;
+          const updatedMessages = [...prev];
+          updatedMessages[lastMsgIndex] = {
+            ...updatedMessages[lastMsgIndex],
+            text: updatedMessages[lastMsgIndex].text + chunk
+          };
+          return updatedMessages;
+        });
+      }
+    } catch (e: any) {
       console.error("Error sending message:", e);
       const errorMessage: Message = { role: 'model', text: "Lo siento, ocurrió un error al procesar tu solicitud. Por favor, inténtalo de nuevo." };
-      setMessages(prev => [...prev, errorMessage]);
-      setError("Error de comunicación con el servicio de IA.");
+      setMessages(prev => [...prev.slice(0, -1), errorMessage]); // Replace placeholder with error
+      setError("Error de comunicación con el servidor.");
     } finally {
       setIsLoading(false);
     }
@@ -104,21 +112,19 @@ const ChatWidget: React.FC = () => {
               <div key={index} className={`flex items-start gap-3 my-3 ${msg.role === 'user' ? 'justify-end' : ''}`}>
                 {msg.role === 'model' && <div className="w-8 h-8 rounded-full bg-brand-blue-light flex items-center justify-center flex-shrink-0"><RobotIcon className="w-5 h-5 text-brand-blue" /></div>}
                 <div className={`max-w-xs px-4 py-2 rounded-2xl ${msg.role === 'user' ? 'bg-blue-600 text-white rounded-br-none' : 'bg-gray-200 text-gray-800 rounded-bl-none'}`}>
-                  <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
+                  {msg.role === 'model' && msg.text === '' && isLoading ? (
+                    <div className="flex items-center justify-center p-1">
+                      <span className="h-2 w-2 bg-brand-blue rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                      <span className="h-2 w-2 bg-brand-blue rounded-full animate-bounce [animation-delay:-0.15s] mx-1"></span>
+                      <span className="h-2 w-2 bg-brand-blue rounded-full animate-bounce"></span>
+                    </div>
+                  ) : (
+                    <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
+                  )}
                 </div>
-                 {msg.role === 'user' && <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0"><UserCircleIcon className="w-6 h-6 text-gray-500" /></div>}
+                {msg.role === 'user' && <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0"><UserCircleIcon className="w-6 h-6 text-gray-500" /></div>}
               </div>
             ))}
-            {isLoading && (
-               <div className="flex items-start gap-3 my-3">
-                 <div className="w-8 h-8 rounded-full bg-brand-blue-light flex items-center justify-center flex-shrink-0"><RobotIcon className="w-5 h-5 text-brand-blue" /></div>
-                 <div className="max-w-xs px-4 py-3 rounded-2xl bg-gray-200 text-gray-800 rounded-bl-none flex items-center">
-                    <span className="h-2 w-2 bg-brand-blue rounded-full animate-bounce [animation-delay:-0.3s]"></span>
-                    <span className="h-2 w-2 bg-brand-blue rounded-full animate-bounce [animation-delay:-0.15s] mx-1"></span>
-                    <span className="h-2 w-2 bg-brand-blue rounded-full animate-bounce"></span>
-                 </div>
-               </div>
-            )}
             <div ref={messagesEndRef} />
           </div>
 
