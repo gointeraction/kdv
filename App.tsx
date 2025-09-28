@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import ChatWidget from './components/ChatWidget';
 import RadarSystemsLandingPage from './components/RadarSystemsLandingPage';
 import AgentsPage from './components/AgentsPage';
 import ErpPage from './components/ErpPage';
@@ -103,7 +102,6 @@ const App: React.FC = () => {
         {renderPage()}
       </main>
       <Footer />
-      <ChatWidget />
     </div>
   );
 };

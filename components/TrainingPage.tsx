@@ -1,7 +1,6 @@
 import React from 'react';
 import { TRAINING_COURSES } from '../constants';
 import type { TrainingCourse } from '../types';
-// FIX: Import missing ServerStackIcon, SparklesIcon, and CreditCardIcon.
 import { CheckCircleIcon, GraduationCapIcon, ServerStackIcon, SparklesIcon, CreditCardIcon } from './icons/Icons';
 import InterspersedCTA from './InterspersedCTA';
 

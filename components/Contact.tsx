@@ -7,19 +7,42 @@ const Contact: React.FC = () => {
     company: '',
     message: '',
   });
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [submitted, setSubmitted] = useState(false);
+
+  const validate = (data: typeof formData) => {
+    const newErrors: { [key: string]: string } = {};
+
+    if (!data.name.trim()) newErrors.name = 'El nombre es obligatorio.';
+    if (!data.company.trim()) newErrors.company = 'La empresa es obligatoria.';
+    if (!data.message.trim()) newErrors.message = 'El mensaje es obligatorio.';
+
+    if (!data.email.trim()) {
+        newErrors.email = 'El email es obligatorio.';
+    } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+        newErrors.email = 'El formato del email no es válido.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({ ...prevState, [name]: value }));
+    const updatedFormData = { ...formData, [name]: value };
+    setFormData(updatedFormData);
+    validate(updatedFormData);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form data submitted:', formData);
-    setSubmitted(true);
-    setFormData({ name: '', email: '', company: '', message: '' });
-    setTimeout(() => setSubmitted(false), 5000);
+    if (validate(formData)) {
+      console.log('Form data submitted:', formData);
+      setSubmitted(true);
+      setErrors({});
+      setFormData({ name: '', email: '', company: '', message: '' });
+      setTimeout(() => setSubmitted(false), 5000);
+    }
   };
 
   return (
@@ -42,7 +65,7 @@ const Contact: React.FC = () => {
               <p>Nos pondremos en contacto contigo a la brevedad.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">Nombre <span className="text-red-500">*</span></label>
@@ -54,8 +77,9 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     required
                     placeholder="Tu nombre completo"
-                    className="mt-1 block w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-brand-green text-white transition-shadow"
+                    className={`mt-1 block w-full px-4 py-3 bg-slate-700 border ${errors.name ? 'border-red-500' : 'border-slate-600'} rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-brand-green text-white transition-shadow`}
                   />
+                  {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                 </div>
                  <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">Email <span className="text-red-500">*</span></label>
@@ -67,8 +91,9 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     required
                     placeholder="tu@email.com"
-                    className="mt-1 block w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-brand-green text-white transition-shadow"
+                    className={`mt-1 block w-full px-4 py-3 bg-slate-700 border ${errors.email ? 'border-red-500' : 'border-slate-600'} rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-brand-green text-white transition-shadow`}
                   />
+                  {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                 </div>
               </div>
               <div>
@@ -81,8 +106,9 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   placeholder="Nombre de tu empresa"
-                  className="mt-1 block w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-brand-green text-white transition-shadow"
+                  className={`mt-1 block w-full px-4 py-3 bg-slate-700 border ${errors.company ? 'border-red-500' : 'border-slate-600'} rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-brand-green text-white transition-shadow`}
                 />
+                {errors.company && <p className="text-red-500 text-sm mt-1">{errors.company}</p>}
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">Mensaje <span className="text-red-500">*</span></label>
@@ -94,8 +120,9 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   placeholder="Cuéntanos sobre tus necesidades y objetivos..."
-                  className="mt-1 block w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-brand-green text-white transition-shadow"
+                  className={`mt-1 block w-full px-4 py-3 bg-slate-700 border ${errors.message ? 'border-red-500' : 'border-slate-600'} rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-brand-green text-white transition-shadow`}
                 ></textarea>
+                {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
               </div>
               <div className="text-center pt-4">
                 <button

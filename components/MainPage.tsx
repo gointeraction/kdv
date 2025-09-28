@@ -1,8 +1,6 @@
 import React from 'react';
 import { SparklesIcon, ServerStackIcon, CreditCardIcon, PencilSquareIcon, GraduationCapIcon, RocketLaunchIcon, BuildingStorefrontIcon, SlidersHorizontalIcon, ChartBarIcon, ArrowUpIcon, CogIcon, CheckBadgeIcon, UserGroupIcon, ShieldCheckIcon } from './icons/Icons';
 import WhyChooseUs from './WhyChooseUs';
-import Testimonials from './Testimonials';
-import { MAIN_TESTIMONIALS } from '../constants';
 import InterspersedCTA from './InterspersedCTA';
 import Implementation from './Implementation';
 
@@ -280,13 +278,6 @@ const MainPage: React.FC = () => {
 
       {/* Implementation */}
       <Implementation />
-      
-      {/* Testimonials */}
-      <Testimonials 
-        title="La confianza de nuestros clientes es nuestro mayor activo"
-        subtitle="Vea cómo hemos ayudado a empresas como la suya a crecer y a ser más eficientes."
-        testimonials={MAIN_TESTIMONIALS}
-      />
       
       {/* WhyChooseUs */}
       <WhyChooseUs />
