@@ -94,60 +94,6 @@ const KDHKA20Page: React.FC = () => {
         }
     ];
 
-    // Pricing data
-    const PRICING_PLANS = [
-        {
-            name: "KD-HKA20 Básico",
-            price: "$899",
-            frequency: "/unidad",
-            initialCost: "$899",
-            users: "1 dispositivo",
-            features: [
-                "Dispositivo KD-HKA20",
-                "Software básico de facturación",
-                "Soporte estándar 30 días",
-                "Garantía 1 año"
-            ],
-            cta: "Comprar Ahora",
-            popular: false
-        },
-        {
-            name: "KD-HKA20 Pro",
-            price: "$1,299",
-            frequency: "/unidad",
-            initialCost: "$1,299",
-            users: "1 dispositivo + software",
-            features: [
-                "Dispositivo KD-HKA20",
-                "Software completo con inventario",
-                "Soporte prioritario 90 días",
-                "Garantía 2 años",
-                "Capacitación incluida",
-                "Actualizaciones gratis 1 año"
-            ],
-            cta: "Comprar Ahora",
-            popular: true
-        },
-        {
-            name: "KD-HKA20 Enterprise",
-            price: "$2,199",
-            frequency: "/unidad",
-            initialCost: "$2,199",
-            users: "1 dispositivo + suite completa",
-            features: [
-                "Dispositivo KD-HKA20",
-                "Suite ERP completa integrada",
-                "Soporte 24/7 ilimitado",
-                "Garantía extendida 3 años",
-                "Capacitación presencial",
-                "Actualizaciones vitalicias",
-                "Integración con sistemas existentes"
-            ],
-            cta: "Contactar Ventas",
-            popular: false
-        }
-    ];
-
     const VideoSection: React.FC = () => (
         <section id="kdhka20-video" className="py-20 bg-white">
             <div className="container mx-auto px-6">
@@ -307,48 +253,6 @@ const KDHKA20Page: React.FC = () => {
                                 <p className="text-gray-600 mb-6 italic">"{testimonial.quote}"</p>
                                 <div className="font-bold text-gray-800">{testimonial.author}</div>
                                 <div className="text-sm text-gray-500">{testimonial.company}</div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Pricing Section */}
-            <section id="kdhka20-pricing" className="py-20 bg-white">
-                <div className="container mx-auto px-6">
-                    <div className="text-center mb-16" data-animate>
-                        <h2 className="text-3xl md:text-4xl font-extrabold text-brand-blue">
-                            Elige el plan perfecto para tu negocio
-                        </h2>
-                        <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-                            Precios transparentes, sin sorpresas. Todo lo que necesitas para empezar.
-                        </p>
-                    </div>
-                    <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                        {PRICING_PLANS.map((plan, index) => (
-                            <div key={index} className={`bg-gray-50 p-8 rounded-3xl border-2 flex flex-col ${plan.popular ? 'border-brand-blue ring-4 ring-brand-blue/20' : 'border-gray-200'}`} data-animate style={{ transitionDelay: `${index * 100}ms` }}>
-                                {plan.popular && (
-                                    <div className="bg-brand-blue text-white text-sm font-bold py-2 px-4 rounded-full inline-block mb-4">
-                                        MÁS POPULAR
-                                    </div>
-                                )}
-                                <h3 className="text-2xl font-bold text-brand-blue mb-2">{plan.name}</h3>
-                                <p className="text-gray-500 mb-6">Costo inicial único de <span className="font-bold">{plan.initialCost}</span></p>
-                                <div className="flex-grow">
-                                    <p className="text-5xl font-extrabold text-gray-900 mb-2">{plan.price}<span className="text-lg font-medium text-gray-500">{plan.frequency}</span></p>
-                                    <p className="font-semibold text-gray-600 mb-6">{plan.users}</p>
-                                    <ul className="space-y-3 mb-8">
-                                        {plan.features.map((feature, featureIndex) => (
-                                            <li key={featureIndex} className="flex items-start">
-                                                <CheckCircleIcon className="h-5 w-5 text-brand-green mr-3 mt-0.5 flex-shrink-0" />
-                                                <span className="text-gray-600">{feature}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                                <a href="#kdhka20-contact" className={`mt-8 block w-full text-center font-bold py-3 px-6 rounded-full text-lg transition-all transform hover:scale-105 ${plan.popular ? 'bg-brand-blue text-white hover:bg-blue-700' : 'bg-white border-2 border-brand-blue text-brand-blue hover:bg-blue-50'}`}>
-                                    {plan.cta}
-                                </a>
                             </div>
                         ))}
                     </div>
