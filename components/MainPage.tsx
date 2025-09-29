@@ -69,7 +69,7 @@ const MainPage: React.FC = () => {
             
             {/* AI Agents Card */}
             <a href="#/agents" className="group relative block h-96 overflow-hidden rounded-2xl shadow-xl no-underline transform hover:-translate-y-2 transition-transform duration-300" data-animate style={{ transitionDelay: '100ms' }}>
-              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 ease-in-out group-hover:scale-110" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1620712943543-26fc76334a19?q=80&w=2070&auto=format&fit=crop')" }}></div>
+              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 ease-in-out group-hover:scale-110" style={{ backgroundImage: "url('/images/agents/ia4.svg')" }}></div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
               <div className="relative flex flex-col h-full p-8 text-white justify-end">
                 <div className="mb-4 w-16 h-16 rounded-full flex items-center justify-center bg-white/20 backdrop-blur-sm border border-white/30">

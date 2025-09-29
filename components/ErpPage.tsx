@@ -36,7 +36,7 @@ const ErpPage: React.FC = () => {
         <div className="bg-white">
             {/* Hero Section */}
             <section id="erp-hero" className="relative pt-40 pb-20 text-white overflow-hidden bg-brand-blue-dark">
-                 <div className="absolute inset-0 bg-cover bg-center opacity-10" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=2070&auto=format&fit=crop')" }}></div>
+                 <div className="absolute inset-0 bg-cover bg-center opacity-10" style={{ backgroundImage: "url('/images/erp/erp2.svg')" }}></div>
                  <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-dark via-brand-blue-dark/80 to-transparent"></div>
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -51,13 +51,13 @@ const ErpPage: React.FC = () => {
                                 <a href="#erp-contact" className="bg-brand-green text-brand-blue-dark font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-600 transition-all transform hover:scale-105 w-full sm:w-auto shadow-lg">
                                     Solicitar Demostración Gratis
                                 </a>
-                                <a href="https://wa.me/584125880517" target="_blank" rel="noopener noreferrer" className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-white hover:text-brand-blue-dark transition-all w-full sm:w-auto">
+                                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-white hover:text-brand-blue-dark transition-all w-full sm:w-auto">
                                     Hablar con un Asesor
                                 </a>
                             </div>
                         </div>
                         <div className="hidden md:flex justify-center">
-                           <img src="https://i.imgur.com/eQ3b5Gq.png" alt="RadarSystems ERP Dashboard" className="max-w-md w-full" />
+                           <img src="/images/erp/erp1.svg" alt="RadarSystems ERP Dashboard" className="max-w-md w-full" />
                         </div>
                     </div>
                 </div>
@@ -133,7 +133,7 @@ const ErpPage: React.FC = () => {
             </section>
             
             {/* CTA Section 1 */}
-            <section className="relative py-24 bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=2070&auto=format&fit=crop')" }}>
+            <section className="relative py-24 bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('/images/erp/erp2.svg')" }}>
                 <div className="absolute inset-0 bg-brand-blue-dark/70"></div>
                 <div className="relative container mx-auto px-6 text-center text-white">
                     <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
@@ -196,7 +196,7 @@ const ErpPage: React.FC = () => {
             </section>
 
             {/* CTA Section 2 */}
-            <section className="relative py-24 bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1586473219010-2ffc57b0d282?q=80&w=2148&auto=format&fit=crop')" }}>
+            <section className="relative py-24 bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('/images/erp/erp7.svg')" }}>
                 <div className="absolute inset-0 bg-brand-blue-dark/75"></div>
                 <div className="relative container mx-auto px-6 text-center text-white">
                     <h2 className="text-3xl md:text-4xl font-extrabold mb-4">

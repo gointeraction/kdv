@@ -125,16 +125,6 @@ const SecurityPage: React.FC = () => {
                              <p className="text-blue-800">Resultados confiables o te devolvemos la asesoría inicial.</p>
                         </div>
                     </div>
-                    {/* Logos */}
-                     <div className="mt-16 text-center" data-animate>
-                        <h4 className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-4">Con la confianza de</h4>
-                         <div className="flex justify-center items-center gap-8 md:gap-12 flex-wrap">
-                            <span className="text-gray-400 font-semibold text-xl">Empresa XYZ</span>
-                            <span className="text-gray-400 font-semibold text-xl">Empresa ABC</span>
-                             <span className="text-gray-400 font-semibold text-xl">Compañía Tech</span>
-                             <span className="text-gray-400 font-semibold text-xl">Servicios Seguros</span>
-                         </div>
-                    </div>
                 </div>
             </section>
             
