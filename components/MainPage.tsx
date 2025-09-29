@@ -8,7 +8,7 @@ const MainPage: React.FC = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center text-white bg-brand-blue-dark">
+      <section className="relative h-[90vh] md:h-[100vh] flex items-center justify-center text-white bg-brand-blue-dark">
         <div className="absolute inset-0 opacity-20">
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -23,7 +23,7 @@ const MainPage: React.FC = () => {
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse animation-delay-4000"></div>
         <div className="relative z-10 text-center px-6">
           <h1 
-            className="text-4xl md:text-6xl font-extrabold mb-4 opacity-0 animate-fade-in-down"
+            className="text-4xl md:text-6xl font-extrabold mb-8 opacity-0 animate-fade-in-down"
             style={{ animationDelay: '0.2s' }}
           >
             Acelera tu Crecimiento con el Ecosistema Digital Completo

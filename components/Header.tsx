@@ -121,10 +121,10 @@ const Header: React.FC<HeaderProps> = ({ currentPath }) => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-brand-blue-dark/90 shadow-lg backdrop-blur-sm`}>
-      <div className="container mx-auto px-6 py-2 flex justify-between items-center">
-        <a href="#/" className="flex items-center gap-3">
-          <img src="/logo.svg" alt="Kit Digital Venezuela Logo" className="h-16 w-auto" />
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-brand-blue-dark shadow-lg backdrop-blur-sm`}>
+      <div className="container mx-auto px-6 py-0.5 flex justify-between items-center">
+        <a href="#/" className="flex items-center gap-0">
+          <img src="/logo.svg" alt="Kit Digital Venezuela Logo" className="h-32 w-auto" />
         </a>
         <nav className="hidden md:flex space-x-8 items-center">
           {renderNavLinks(false)}
