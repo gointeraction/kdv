@@ -7,11 +7,10 @@ const AgentCard: React.FC<{ agent: Agent; index: number }> = ({ agent, index }) 
         <div 
             className="group relative bg-white pt-20 pb-8 px-6 rounded-2xl shadow-lg border border-gray-100 flex flex-col h-full text-center transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl"
             data-animate
-            style={{ transitionDelay: `${index * 100}ms` }}
         >
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
                 <div className={`w-28 h-28 rounded-full flex items-center justify-center p-3 shadow-lg border-4 border-white transition-colors duration-300 ${agent.iconBgClass} group-hover:bg-brand-blue`}>
-                   {React.cloneElement(agent.icon, { className: `${agent.icon.props.className} h-14 w-14 group-hover:text-white transition-colors duration-300` })}
+                    {React.cloneElement(agent.icon, { className: `${agent.icon.props.className} h-14 w-14 group-hover:text-white transition-colors duration-300` })}
                 </div>
             </div>
             
@@ -19,7 +18,7 @@ const AgentCard: React.FC<{ agent: Agent; index: number }> = ({ agent, index }) 
             <p className="text-gray-500 font-medium mt-2 mb-6 flex-grow">{agent.shortDescription}</p>
 
             <a
-                href={`#${agent.id}`}
+                href={`#/agents/${agent.id}`}
                 className="w-full mt-auto text-center font-semibold py-3 px-4 rounded-lg border-2 border-gray-300 text-gray-700 group-hover:bg-brand-blue group-hover:text-white group-hover:border-brand-blue transition-all duration-300"
             >
                 Conocer más

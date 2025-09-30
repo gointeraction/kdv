@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AGENTS_DATA } from '../constants';
 import { CheckCircleIcon } from './icons/Icons';
 import type { Agent } from '../types';
 
 const AgentDetailCard: React.FC<{ agent: Agent }> = ({ agent }) => {
-    // Helper component for list sections (Features, Use Cases, Benefits)
+    // Helper component for list sections (Features, Use Cases, benefits)
     const ListSection: React.FC<{ title: string; items: string[] }> = ({ title, items }) => (
         <div>
             <h4 className="text-xl font-bold text-gray-800 mb-4 text-left">{title}</h4>
@@ -47,7 +47,7 @@ const AgentDetailCard: React.FC<{ agent: Agent }> = ({ agent }) => {
 
             <div className="text-center mt-16">
                 <a 
-                    href="#contact" 
+                    href="#/contact" 
                     className="bg-brand-blue text-white font-bold py-4 px-10 rounded-full text-xl hover:bg-blue-700 transition-all transform hover:scale-105 inline-block shadow-lg"
                 >
                     {agent.cta}
@@ -57,15 +57,42 @@ const AgentDetailCard: React.FC<{ agent: Agent }> = ({ agent }) => {
     );
 };
 
-
 const AgentDetails: React.FC = () => {
+    const [currentAgent, setCurrentAgent] = useState<Agent | null>(null);
+
+    useEffect(() => {
+        const path = window.location.hash.substring(1); // Remove the #
+        const agentId = path.split('/').pop(); // Get the last part of the path
+        
+        if (agentId) {
+            const agent = AGENTS_DATA.find(a => a.id === agentId);
+            setCurrentAgent(agent || null);
+        }
+    }, []);
+
+    if (!currentAgent) {
+        return (
+            <section className="py-20 bg-brand-gray">
+                <div className="container mx-auto px-6 text-center">
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-brand-blue mb-4">
+                        Agente no encontrado
+                    </h2>
+                    <p className="text-lg text-gray-600 mb-8">
+                        El agente que buscas no existe o ha sido movido.
+                    </p>
+                    <a href="#/agents" className="bg-brand-blue text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-blue-700 transition-all">
+                        Volver a Agentes
+                    </a>
+                </div>
+            </section>
+        );
+    }
+
     return (
         <section className="py-20 bg-brand-gray">
             <div className="container mx-auto px-6">
-                <div className="space-y-28 pt-16">
-                    {AGENTS_DATA.map((agent) => (
-                        <AgentDetailCard key={agent.id} agent={agent} />
-                    ))}
+                <div className="pt-16">
+                    <AgentDetailCard agent={currentAgent} />
                 </div>
             </div>
         </section>

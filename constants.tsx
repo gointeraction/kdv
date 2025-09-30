@@ -25,7 +25,7 @@ export const NAV_LINKS: NavLink[] = [
     ],
   },
   { name: 'Diagnóstico Personalizado', href: '#/analisis-cliente' },
-  { name: 'Contacto', href: '#/agents#contact' },
+  { name: 'Contacto', href: '#/contact' },
 ];
 
 export const BENEFITS_DATA: Benefit[] = [

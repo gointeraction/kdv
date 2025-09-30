@@ -333,7 +333,7 @@ const MainPage: React.FC = () => {
         title="¿Listo para dar el siguiente paso?"
         description="Nuestro equipo está listo para mostrarte en una demostración en vivo cómo nuestras herramientas pueden transformar tu empresa."
         buttonText="Solicitar una Demostración"
-        buttonLink="#/agents#contact"
+        buttonLink="#/contact"
       />
     </>
   );

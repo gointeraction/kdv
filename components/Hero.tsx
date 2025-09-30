@@ -33,21 +33,14 @@ const Hero: React.FC = () => {
             className="text-lg md:text-xl max-w-3xl mx-auto mb-8 opacity-0 animate-fade-in-up" 
             style={{ animationDelay: '0.4s' }}
         >
-          Impulsa la eficiencia de tu empresa con nuestra suite de agentes de inteligencia artificial diseñados para transformar procesos, optimizar tareas y maximizar resultados.
         </p>
         <div 
             className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in-up" 
             style={{ animationDelay: '0.6s' }}
         >
           <a 
-            href="#agents" 
+            href="#/contact" 
             className="bg-brand-green text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-green-700 transition-all transform hover:scale-105 w-full sm:w-auto shadow-lg hover:shadow-xl"
-          >
-            Conoce a Nuestros Agentes
-          </a>
-          <a 
-            href="#contact" 
-            className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-white hover:text-brand-blue-dark transition-all w-full sm:w-auto"
           >
             Solicitar Demostración
           </a>

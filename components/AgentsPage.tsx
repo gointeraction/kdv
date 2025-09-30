@@ -21,7 +21,7 @@ const AgentsPage: React.FC = () => {
         title="¿Viste un Agente que te Interesa?"
         description="Nuestros expertos pueden mostrarte en vivo cómo DocuMind, LeadGenius o cualquiera de nuestros agentes puede integrarse en tus flujos de trabajo actuales."
         buttonText="Ver una Demo en Acción"
-        buttonLink="#contact"
+        buttonLink="#/contact"
       />
       <AgentDetails />
       <WhyChooseUs />
@@ -30,7 +30,7 @@ const AgentsPage: React.FC = () => {
         title="Implementación Rápida, Resultados Duraderos"
         description="En solo 4 semanas, podemos tener tu primer agente de IA funcionando y generando valor. ¿Hablamos de tu proyecto?"
         buttonText="Planifiquemos tu Éxito"
-        buttonLink="#contact"
+        buttonLink="#/contact"
       />
       <Implementation />
       <Contact />

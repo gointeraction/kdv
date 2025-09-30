@@ -12,6 +12,8 @@ import ConsultantTrainingPage from './components/ConsultantTrainingPage';
 import MainPage from './components/MainPage';
 import CustomerAnalysisPage from './components/CustomerAnalysisPage';
 import SecurityPage from './components/SecurityPage';
+import Contact from './components/Contact';
+import AgentDetails from './components/AgentDetails';
 
 const App: React.FC = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -86,10 +88,12 @@ const App: React.FC = () => {
         return <CustomerAnalysisPage />;
       case '/seguridad-informatica':
         return <SecurityPage />;
+      case '/contact':
+        return <Contact />;
       default:
         // Handle agent detail routes
         if (currentPath.startsWith('/agents/')) {
-            return <AgentsPage />;
+            return <AgentDetails />;
         }
         return <NotFoundPage />;
     }

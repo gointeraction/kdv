@@ -42,7 +42,7 @@ const CourseCard: React.FC<{ course: TrainingCourse, index: number }> = ({ cours
                 </ul>
             </div>
 
-            <a href="#/agents#contact" className={`mt-auto block w-full text-center font-bold py-3 px-6 rounded-lg text-lg transition-all transform hover:scale-105 ${categoryColor.replace('border-', 'bg-').replace('bg-white','')} hover:opacity-90`}>
+            <a href="#/contact" className={`mt-auto block w-full text-center font-bold py-3 px-6 rounded-lg text-lg transition-all transform hover:scale-105 ${categoryColor.replace('border-', 'bg-').replace('bg-white','')} hover:opacity-90`}>
                 Solicitar Información
             </a>
         </div>
@@ -125,7 +125,7 @@ const TrainingPage: React.FC = () => {
                 title="¿Necesitas un Entrenamiento a tu Medida?"
                 description="Si tienes requerimientos específicos o necesitas capacitar a un equipo grande, podemos diseñar un plan de entrenamiento personalizado para tu empresa."
                 buttonText="Contactar a un Asesor"
-                buttonLink="#/agents#contact"
+                buttonLink="#/contact"
             />
         </div>
     );

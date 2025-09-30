@@ -12,7 +12,7 @@ const CTASection: React.FC = () => {
                     Descubre cómo nuestros agentes de IA pueden transformar tus operaciones, mejorar la eficiencia y llevar tu negocio al siguiente nivel.
                 </p>
                 <a
-                    href="#contact"
+                    href="#/contact"
                     className="bg-brand-green text-brand-blue-dark font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-600 transition-all transform hover:scale-105 inline-block shadow-lg hover:shadow-xl"
                 >
                     Solicita una Demostración Gratuita
